@@ -32,4 +32,10 @@ public class TransactionTest {
         Transaction.create("10:10:50", "", "1");
     }
 
+    @Test
+    public void testEquals() {
+        Transaction t = Transaction.create("10:10:20", "100", "1");
+        Transaction t1 = Transaction.create("10:10:20", "100", "1");
+        assertEquals(t1, t1);
+    }
 }

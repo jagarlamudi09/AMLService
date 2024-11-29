@@ -14,18 +14,34 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Implementation of DataService - to load the transaction details from CSV file
+ * with the format specified below:
+ * Time,Amount,Account
+ */
 public class CSVDataService implements DataService {
     private static final Logger logger = LoggerFactory.getLogger(CSVDataService.class.getName());
     private final String fileName;
 
+    /**
+     * @param fileName - Name of the CSV File with transaction info
+     *                 <p>
+     *                 If the specified file is not found, throws IllegalArgumentException
+     */
     public CSVDataService(String fileName) {
         this.fileName = fileName;
         File f = new File(fileName);
         if (!f.exists() || f.isDirectory()) {
             throw new IllegalArgumentException("File doesn't exist :" + fileName);
         }
-
     }
+
+    /**
+     * @return returns the collection of transactions loaded from the CSV file.
+     * If any Transactions info is invalid - ignores and logs the info
+     * <p>
+     * If any exceptions while parsing the csv file, returns empty collection
+     */
 
     @Override
     public List<Transaction> loadData() {
